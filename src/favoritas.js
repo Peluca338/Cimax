@@ -1,0 +1,69 @@
+import { createApp } from 'vue'
+import './style.css'
+import App from './Favoritas.vue'
+
+createApp(App).mount('#favoritas')
+
+
+// Al momento de cargar el DOM, de manera asincrona voy a esperar a que se abra la base de datos
+// y voy a mostrar las peliculas favoritas. Todo eso lo hago llamando a las 2 funcoines
+document.addEventListener('DOMContentLoaded', async () => {
+    await openDatabase();
+    mostrarFavoritas();
+
+    //Para hacer que mi boton borre las peliculas 
+    const btnBorrar = document.getElementById('btnBorrar');
+    btnBorrar.addEventListener('click', async () => {
+        await borrarFavoritas();
+        Swal.fire({
+            title: 'Favoritas Borrado',
+            text: 'Colección de películas borrada.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+        mostrarFavoritas();
+    });
+});
+
+const mostrarFavoritas = async () => {
+    const favoritas = await obtenerPeliculas();
+    const divFavoritas = document.getElementById('favoritas');
+    divFavoritas.innerHTML = '';
+
+    if (favoritas.length === 0) {
+        Swal.fire({
+            title: 'Error',
+            text: 'No hay pelis favoritas del momento',
+            icon: 'error'
+        });
+        return;
+    }
+
+    favoritas.forEach((pelicula, index) => {
+        const poster = pelicula.Poster !== "N/A" ? pelicula.Poster : "/imagenes/nohaypeli.png";
+        divFavoritas.innerHTML += `
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="${poster}" class="card-img-top" alt="${pelicula.Title}">
+                    <div class="card-body">
+                        <h5 class="card-title">${pelicula.Title}</h5>
+                        <p class="card-text">Año: ${pelicula.Year}</p>
+                        <p class="card-text">Director: ${pelicula.Director}</p>
+                        <button class="btn btn-danger mt-2" onclick="eliminarPeliculaHandler('${pelicula.Title}')">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+};
+
+const borrarFavoritas = async (title) => {
+    await eliminarPelicula(title);
+    Swal.fire({
+        title: 'Película Eliminada',
+        text: 'La película ha sido eliminada de tus favoritas.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+    });
+    mostrarFavoritas();
+};

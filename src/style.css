@@ -1,0 +1,104 @@
+.headerDiv{
+  display: flex;
+  justify-content: center;
+  background-color: #2B2B2B;
+  height: 15em;
+}
+
+.headerLogo{
+  img{
+      margin: 2em;
+  }
+}
+
+.busquedaEstilos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formClass{
+  color: black;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+  width: 15em;
+  input{
+      text-align: center;
+      padding: 5px;
+      font-size: x-large
+  };
+  input::placeholder{
+      color: black;
+  }
+}
+
+.btnsClass{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+  width: 15em;
+  button{
+      padding: 5px 15px;
+      font-size: larger;
+      font-weight: 600;
+  }
+}
+
+#btnBuscar{
+  background-color: #5BC0BE;
+  border-style: solid;
+  border-color: #5BC0BE;
+  border-radius: 5px;
+}
+
+#btnFavoritas{
+  background-color: #1C2541;
+  border-style: solid;
+  border-color: #1C2541;
+  border-radius: 5px;
+  color: white;
+}
+
+.footerInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #080A1B;
+  color: white;
+  padding: 5em;
+  margin-top: 26em;
+}
+
+.isoImg{
+  margin-bottom: 2em;
+}
+
+.copyTxt{
+  margin-bottom: 1rem;
+  font-size: larger;
+}
+
+.autoresTxt{
+  ul{
+      list-style-type: none;
+      text-align: center;
+      padding: 0px;
+      font-size: larger;
+  }
+}
+
+.mainPelisGuardadas{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1{
+    margin-top: 1em;
+  }
+  button{
+    padding: 5px 15px;
+    font-weight: 600;
+    font-size: larger;
+    margin-top: 2em;
+  }
+}
